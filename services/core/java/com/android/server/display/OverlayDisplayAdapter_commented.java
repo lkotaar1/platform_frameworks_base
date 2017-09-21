@@ -26,7 +26,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
-import android.util.Slog;
+import android.util.Slog;n
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Surface;
@@ -66,32 +66,32 @@ import java.util.regex.Pattern;
  * </ul>
  * </p>
  */
-final class OverlayDisplayAdapter extends DisplayAdapter {
-    static final String TAG = "OverlayDisplayAdapter";
+final class OverlayDisplayAdapter extends DisplayAdapter { // display adaptor cannot have any subclass
+    static final String TAG = "OverlayDisplayAdapter"; 
     static final boolean DEBUG = false;
-
+    //variable declaration  
     private static final int MIN_WIDTH = 100;
     private static final int MIN_HEIGHT = 100;
     private static final int MAX_WIDTH = 4096;
     private static final int MAX_HEIGHT = 4096;
 
     private static final Pattern DISPLAY_PATTERN =
-            Pattern.compile("([^,]+)(,[a-z]+)*");
+            Pattern.compile("([^,]+)(,[a-z]+)*"); //matches any single character not in brackets
     private static final Pattern MODE_PATTERN =
-            Pattern.compile("(\\d+)x(\\d+)/(\\d+)");
+            Pattern.compile("(\\d+)x(\\d+)/(\\d+)"); //matches the digits equivalent to 0-9 (\d)
 
     // Unique id prefix for overlay displays.
     private static final String UNIQUE_ID_PREFIX = "overlay:";
 
-    private final Handler mUiHandler;
+    private final Handler mUiHandler;  // handler declaration
     private final ArrayList<OverlayDisplayHandle> mOverlays =
-            new ArrayList<OverlayDisplayHandle>();
-    private String mCurrentOverlaySetting = "";
+            new ArrayList<OverlayDisplayHandle>();  //creating array list with object moverlay
+    private String mCurrentOverlaySetting = ""; // declaring a null string
 
-    // Called with SyncRoot lock held.
+    // Called with SyncRoot lock held. // initialising the objects and allocating memory
     public OverlayDisplayAdapter(DisplayManagerService.SyncRoot syncRoot,
             Context context, Handler handler, Listener listener, Handler uiHandler) {
-        super(syncRoot, context, handler, listener, TAG);
+        super(syncRoot, context, handler, listener, TAG); // invokes super classes constructor(display adaptor)
         mUiHandler = uiHandler;
     }
 
@@ -99,8 +99,8 @@ final class OverlayDisplayAdapter extends DisplayAdapter {
     public void dumpLocked(PrintWriter pw) {
         super.dumpLocked(pw);
 
-        pw.println("mCurrentOverlaySetting=" + mCurrentOverlaySetting);
-        pw.println("mOverlays: size=" + mOverlays.size());
+        pw.println("mCurrentOverlaySetting=" + mCurrentOverlaySetting); // writes the current overly settings in the text format
+        pw.println("mOverlays: size=" + mOverlays.size()); // writes the overlay size as a text
         for (OverlayDisplayHandle overlay : mOverlays) {
             overlay.dumpLocked(pw);
         }
